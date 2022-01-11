@@ -1,0 +1,22 @@
+{
+    "name": "calabash/calabash",
+    "type": "framework",
+    "description": "Calabash, an easy to use PHP framework for fullstack web development. ",
+    "keywords": ["web framework"],
+    "homepage": "https://github.com/Owiredu/calabash",
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "authors": [
+        {
+            "name": "Nana Kofi Owiredu",
+            "email": "nanakofiowiredu@gmail.com",
+            "role": "Project Founder"
+        }
+    ],
+    "config": {
+        "vendor-dir": "./php_modules"
+    },
+    "require": {
+        "twig/twig": "^3.0"
+    }
+}
