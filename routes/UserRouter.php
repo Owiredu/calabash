@@ -3,7 +3,7 @@
 namespace Routes;
 
 // require controllers
-require(__DIR__ . '../controllers/UserController');
+require(__DIR__ . '/../controllers/UserController.php');
 
 // use namespaces
 use Controllers;
@@ -14,7 +14,7 @@ use Controllers;
 class UserRouter {
 
     public function index() {
-        return Controllers\UserController::index();
+        Controllers\UserController::hello();
     }
 
 }
