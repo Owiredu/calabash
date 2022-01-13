@@ -14,7 +14,16 @@ use Twig\Environment;
  */
 class Response {
 
+    /**
+     * File system loader for Twig
+     * @var FilesystemLoader
+     */
     private $loader;
+
+    /**
+     * Twig environment
+     * @var Environment
+     */
     private $twig;
 
     /**
@@ -47,23 +56,23 @@ class Response {
     }
     
     /**
-     * Renders a template
+     * Renders a template and returns it as a response
      * @param string|TemplateWrapper $template_name — The template name
      * @param array $context
      * @throws LoaderError — When the template cannot be found
      * @throws SyntaxError — When an error occurred during compilation
      * @throws RuntimeError — When an error occurred during rendering
      */
-    public function render(string $template_name, array $context = []): string {
+    public function render(string $template_name, array $context = []) {
         // send response
-        return $this->twig->render($template_name, $context);
+        echo $this->twig->render($template_name, $context);
     }
 
     /**
-     * Sends json data
+     * Sends JSON response
      * @param array $json_data Response data set by user
      */
-    public function json(array $json_data = []): string {
+    public function json(array $json_data = []) {
         // set the content type to JSON
         header("Content-Type: application/json", true, $this->status_code);
 
@@ -73,8 +82,8 @@ class Response {
             "status_code" => $this->status_code
         );
 
-        // send response 
-        return $json_data == [] ? [] : json_encode($response_data, true);
+        // sends response 
+        echo json_encode($response_data, true);
     }
 
     /**

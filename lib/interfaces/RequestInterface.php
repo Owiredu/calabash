@@ -6,5 +6,5 @@ namespace Lib\Interface;
  */
 interface Request
 {
-    public function getBody();
+    public function body();
 }

@@ -4,9 +4,11 @@ namespace Lib\Class;
 
 // require modules
 include_once(__DIR__ . '/../interfaces/RequestInterface.php');
+include_once(__DIR__ . '/ResponseClass.php');
 
 // use namespaces
 use Lib\Interface\Request as RequestInterface;
+use Lib\Class\Response as HTTPResponse;
 
 /**
  * Router class
@@ -14,33 +16,65 @@ use Lib\Interface\Request as RequestInterface;
 class Router
 {
 
-    private $request;
-    private $supportedHttpMethods = array(
+    /**
+     * Request object
+     * @var RequestInterface
+     */
+    private RequestInterface $request;
+
+    /**
+     * Response object
+     * @var HTTPResponse
+     */
+    private HTTPResponse $response;
+
+    /**
+     * Supported HTTP methods
+     * @var array
+     */
+    private $supported_http_methods = array(
         "GET",
         "POST",
     );
 
-    public function __construct(RequestInterface $request)
+    public function __construct(RequestInterface $request, HTTPResponse $response)
     {
+        // initialize the request and response objects
         $this->request = $request;
+        $this->response = $response;
     }
 
+    /**
+     * This method is invoked automatically when a non-existing method or inaccessible method is called.
+     * @param string $name The name of the method that is called on this class' instance
+     * @param array $args An array of arguments passed to the method call
+     */
     public function __call($name, $args)
     {
+        // get the route and the method that handles it from the arguments array
         list($route, $method) = $args;
 
-        if (!in_array(strtoupper($name), $this->supportedHttpMethods)) {
-            $this->invalidMethodHandler();
+        // check if the method is in the list of supported methods
+        // if not in the list of supported methods, call the invalid method handler
+        if (!in_array(strtoupper($name), $this->supported_http_methods)) {
+            $this->invalid_method_handler();
         }
 
-        $this->{strtolower($name)}[$this->formatRoute($route)] = $method;
+        // set the method (together with its associated route) as a property of the instance of this class.
+        // this is stored as a dictionary where the dictionary name is the request method (get, post, etc).
+        // the index is the route string and the value is the callback function that handles that route.
+        // format: $this-> <method_name(get, post, etc)> [<route>] = <callback>
+        // eg. $this->get['/'] = function(...) {}
+        // eg. $this->get['/user'] = function(...) {}
+        $this->{strtolower($name)}[$this->format_route($route)] = $method;
     }
 
     /**
      * Removes trailing forward slashes from the right of the route.
-     * @param route (string)
+     * @param string $route The route to be formatted
+     * @return string The formatted route
      */
-    private function formatRoute($route)
+    private function format_route($route): string
     {
         $result = rtrim($route, '/');
         if ($result === '') {
@@ -49,12 +83,18 @@ class Router
         return $result;
     }
 
-    private function invalidMethodHandler()
+    /**
+     * Handle an invalid method call
+     */
+    private function invalid_method_handler()
     {
         header("{$this->request->serverProtocol} 405 Method Not Allowed");
     }
 
-    private function defaultRequestHandler()
+    /**
+     * Handle routes that cannot be found
+     */
+    private function default_request_handler()
     {
         header("{$this->request->serverProtocol} 404 Not Found");
     }
@@ -64,16 +104,24 @@ class Router
      */
     public function resolve()
     {
-        $methodDictionary = $this->{strtolower($this->request->requestMethod)};
-        $formatedRoute = $this->formatRoute($this->request->requestUri);
-        $method = $methodDictionary[$formatedRoute];
+        // get the request method (get, post, etc) dictionary
+        $method_dictionary = $this->{strtolower($this->request->requestMethod)};
 
+        // format the request URI and use the resulting value as the route
+        $formatted_route = $this->format_route($this->request->requestUri);
+
+        // get the method associated with that route
+        $method = $method_dictionary[$formatted_route];
+
+        // if no method is associated with the route, send a not found response
         if (is_null($method)) {
-            $this->defaultRequestHandler();
+            $this->default_request_handler();
             return;
         }
 
-        echo call_user_func_array($method, array($this->request));
+        // if a method is found for the route, call the associated callback function,
+        // passing in the request and response objects as arguments
+        call_user_func_array($method, array($this->request, $this->response));
     }
 
     public function __destruct()
