@@ -1,9 +1,18 @@
 <?php
 // require routers
-require(__DIR__ . '/routes/UserRouter.php');
+include_once(__DIR__ . '/routes/UserRouter.php');
+include_once(__DIR__ . '/lib/classes/RequestClass.php');
+include_once(__DIR__ . '/lib/classes/RouterClass.php');
 
-use Routes\UserRouter;
+// use interfaces
+use Lib\Class\Router as HTTPRouter;
+use Lib\Class\Request as HTTPRequest;
+use Routes\Class\UserRouter as UserRouter;
 
-$user_router = new UserRouter();
-$user_router->index();
-echo($_SERVER["REQUEST_URI"]);
+// create the router
+$router = new HTTPRouter(new HTTPRequest);
+
+// add routes
+$router->get('/calabash/user', function($request) {
+    return UserRouter::hello($request);
+});

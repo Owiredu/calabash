@@ -1,20 +1,21 @@
 <?php
 // declare namespace
-namespace Routes;
+namespace Routes\Class;
 
-// require controllers
-require(__DIR__ . '/../controllers/UserController.php');
-
-// use namespaces
-use Controllers;
+// require modules
+include_once(__DIR__ . '/../controllers/UserController.php');
 
 /**
  * User router
  */
 class UserRouter {
 
-    public function index() {
-        Controllers\UserController::hello();
+    public static function main() {
+
+    }
+
+    public static function hello($request) {
+        return \Controllers\UserController::hello();
     }
 
 }

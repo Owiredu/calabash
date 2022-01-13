@@ -1,28 +1,34 @@
 <?php
 // declare namespace
-namespace Response;
+namespace Lib\Class;
 
 // require modules
-require(__DIR__ . '/../../php_modules/autoload.php');
+include_once(__DIR__ . '/../../php_modules/autoload.php');
 
 // use Twig modules
 use Twig\Loader\FilesystemLoader;
 use Twig\Environment;
-
-// set Twig environment to load views from views directory
-$loader = new FilesystemLoader(__DIR__ . '/../../views');
-$twig = new Environment($loader);
 
 /**
  * Respons class
  */
 class Response {
 
+    private $loader;
+    private $twig;
+
     /**
      * Status code
      * @var int
      */
     public int $status_code = 200;
+
+    public function __construct()
+    {
+        // set Twig environment to load views from views directory
+        $this->loader = new FilesystemLoader(__DIR__ . '/../../views');
+        $this->twig = new Environment($this->loader);
+    }
 
     /**
      * Sets status code
@@ -48,17 +54,16 @@ class Response {
      * @throws SyntaxError — When an error occurred during compilation
      * @throws RuntimeError — When an error occurred during rendering
      */
-    public function render(string $template_name, array $context = []) {
+    public function render(string $template_name, array $context = []): string {
         // send response
-        global $twig;
-        echo $twig->render($template_name, $context);
+        return $this->twig->render($template_name, $context);
     }
 
     /**
      * Sends json data
      * @param array $json_data Response data set by user
      */
-    public function json(array $json_data = []) {
+    public function json(array $json_data = []): string {
         // set the content type to JSON
         header("Content-Type: application/json", true, $this->status_code);
 
@@ -69,7 +74,7 @@ class Response {
         );
 
         // send response 
-        echo $json_data == [] ? [] : json_encode($response_data, true);
+        return $json_data == [] ? [] : json_encode($response_data, true);
     }
 
     /**
