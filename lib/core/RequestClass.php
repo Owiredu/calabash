@@ -1,12 +1,12 @@
 <?php
 // declare namespace
-namespace Lib\Class;
+namespace Lib\Core\Class;
 
 // require modules
-require_once(__DIR__ . '/../interfaces/RequestInterface.php');
+require_once(__DIR__ . '/RequestInterface.php');
 
 // use namespaces
-use Lib\Interface\Request as RequestInterface;
+use Lib\Core\Interface\Request as RequestInterface;
 
 /**
  * Request class

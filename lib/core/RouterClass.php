@@ -1,14 +1,14 @@
 <?php
 // declare namespace
-namespace Lib\Class;
+namespace Lib\Core\Class;
 
 // require modules
-require_once(__DIR__ . '/../interfaces/RequestInterface.php');
+require_once(__DIR__ . '/RequestInterface.php');
 require_once(__DIR__ . '/ResponseClass.php');
 
 // use namespaces
-use Lib\Interface\Request as RequestInterface;
-use Lib\Class\Response as HTTPResponse;
+use Lib\Core\Interface\Request as RequestInterface;
+use Lib\Core\Class\Response as HTTPResponse;
 
 /**
  * Router class

@@ -1,6 +1,6 @@
 <?php
 // declare namespace
-namespace Lib\Class;
+namespace Lib\Core\Class;
 
 // require modules
 require_once(__DIR__ . '/../../php_modules/autoload.php');

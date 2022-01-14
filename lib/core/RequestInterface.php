@@ -1,5 +1,5 @@
 <?php
-namespace Lib\Interface;
+namespace Lib\Core\Interface;
 
 /**
  * Request interface

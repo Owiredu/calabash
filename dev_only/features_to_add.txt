@@ -1,0 +1,13 @@
+1. Improve routing.
+
+2. Add redirect to response object.
+
+3. Implement validation library. Provide option to validate all post data automatically when the post method is used.
+
+4. Implement database support.
+
+5. Implement email support using php mailer.
+
+6. Implement cross-site request forgery.
+
+7. Implement other security stuff.
