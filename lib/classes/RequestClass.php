@@ -3,7 +3,7 @@
 namespace Lib\Class;
 
 // require modules
-include_once(__DIR__ . '/../interfaces/RequestInterface.php');
+require_once(__DIR__ . '/../interfaces/RequestInterface.php');
 
 // use namespaces
 use Lib\Interface\Request as RequestInterface;

@@ -3,7 +3,8 @@
 namespace Lib\Class;
 
 // require modules
-include_once(__DIR__ . '/../../php_modules/autoload.php');
+require_once(__DIR__ . '/../../php_modules/autoload.php');
+require_once(__DIR__ . '/RouterClass.php');
 
 // use Twig modules
 use Twig\Loader\FilesystemLoader;
@@ -30,7 +31,13 @@ class Response {
      * Status code
      * @var int
      */
-    public int $status_code = 200;
+    private int $status_code = 200;
+
+    /**
+     * Response content type. Eg. application/json, text/html, etc.
+     * @var string
+     */
+    private string $content_type;
 
     public function __construct()
     {
@@ -48,11 +55,27 @@ class Response {
     }
 
     /**
+     * Sets the response content type
+     * @param string $content_type The response content type. Eg. application/json, text/html, etc.
+     */
+    public function set_content_type(string $content_type) {
+        $this->content_type = $content_type;
+    }
+
+    /**
      * Returns status code
      * @return int Status code
      */
     public function get_status_code(): int {
         return $this->status_code;
+    }
+
+    /**
+     * Returns the response content type
+     * @return string The response content type
+     */
+    public function get_content_type(): string {
+        return $this->content_type;
     }
     
     /**
@@ -84,13 +107,6 @@ class Response {
 
         // sends response 
         echo json_encode($response_data, true);
-    }
-
-    /**
-     * Redirects traffic
-     * @param string $route Route path
-     */
-    public function redirect(string $route) {
     }
 
 }

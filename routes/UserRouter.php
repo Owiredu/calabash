@@ -3,7 +3,7 @@
 namespace Routers;
 
 // require modules
-include_once(__DIR__ . '/../controllers/UserController.php');
+require_once(__DIR__ . '/../controllers/UserController.php');
 
 // use namespaces
 use Controllers\UserController as UserController;

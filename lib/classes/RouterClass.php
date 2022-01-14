@@ -3,8 +3,8 @@
 namespace Lib\Class;
 
 // require modules
-include_once(__DIR__ . '/../interfaces/RequestInterface.php');
-include_once(__DIR__ . '/ResponseClass.php');
+require_once(__DIR__ . '/../interfaces/RequestInterface.php');
+require_once(__DIR__ . '/ResponseClass.php');
 
 // use namespaces
 use Lib\Interface\Request as RequestInterface;
@@ -54,12 +54,6 @@ class Router
         // get the route and the method that handles it from the arguments array
         list($route, $method) = $args;
 
-        // check if the method is in the list of supported methods
-        // if not in the list of supported methods, call the invalid method handler
-        if (!in_array(strtoupper($name), $this->supported_http_methods)) {
-            $this->invalid_method_handler();
-        }
-
         // set the method (together with its associated route) as a property of the instance of this class.
         // this is stored as a dictionary where the dictionary name is the request method (get, post, etc).
         // the index is the route string and the value is the callback function that handles that route.
@@ -89,6 +83,10 @@ class Router
     private function invalid_method_handler()
     {
         header("{$this->request->serverProtocol} 405 Method Not Allowed");
+        $this->response->render(
+            'error.html', 
+            ['message' => "Method Not Allowed", 'status' => 405]
+        );
     }
 
     /**
@@ -97,6 +95,10 @@ class Router
     private function default_request_handler()
     {
         header("{$this->request->serverProtocol} 404 Not Found");
+        $this->response->render(
+            'error.html', 
+            ['message' => 'Not Found', 'status' => 404]
+        );
     }
 
     /**
@@ -107,9 +109,16 @@ class Router
         // get the request method (get, post, etc) dictionary
         $method_dictionary = $this->{strtolower($this->request->requestMethod)};
 
+        // check if the request method is in the list of supported methods
+        // if not in the list of supported methods, call the invalid method handler
+        if (!in_array(strtoupper($this->request->requestMethod), $this->supported_http_methods)) {
+            $this->invalid_method_handler();
+            return;
+        }
+
         // format the request URI and use the resulting value as the route
         $formatted_route = $this->format_route($this->request->requestUri);
-
+        
         // get the method associated with that route
         $method = $method_dictionary[$formatted_route];
 

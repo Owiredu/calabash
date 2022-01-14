@@ -1,9 +1,9 @@
 <?php
 // require routers
-include_once(__DIR__ . '/lib/classes/RequestClass.php');
-include_once(__DIR__ . '/lib/classes/ResponseClass.php');
-include_once(__DIR__ . '/lib/classes/RouterClass.php');
-include_once(__DIR__ . '/routes/UserRouter.php');
+require_once(__DIR__ . '/lib/classes/RequestClass.php');
+require_once(__DIR__ . '/lib/classes/ResponseClass.php');
+require_once(__DIR__ . '/lib/classes/RouterClass.php');
+require_once(__DIR__ . '/routes/UserRouter.php');
 
 // use interfaces
 use Lib\Class\Router as HTTPRouter;
@@ -17,7 +17,7 @@ $router = new HTTPRouter(new HTTPRequest, new HTTPResponse);
 // add routes
 
 // using static method as callback
-$router->get('/calabash/user', [UserRouter::class, 'hello']); 
+$router->get('/calabash/user', [UserRouter::class, 'hello']);
 
 // using anonymous function as callback
 $router->post('/calabash/login', function($request, $response) {
