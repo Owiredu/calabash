@@ -1,6 +1,6 @@
 <?php
 // declare namespace
-namespace Lib\Core\Class;
+namespace Lib\Core;
 
 /**
  * Request class

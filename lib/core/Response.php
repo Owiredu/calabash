@@ -1,10 +1,10 @@
 <?php
 // declare namespace
-namespace Lib\Core\Class;
+namespace Lib\Core;
 
 // require modules
 require_once(__DIR__ . '/../../php_modules/autoload.php');
-require_once(__DIR__ . '/RouterClass.php');
+require_once(__DIR__ . '/Router.php');
 
 // use Twig modules
 use Twig\Loader\FilesystemLoader;

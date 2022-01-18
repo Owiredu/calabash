@@ -1,16 +1,16 @@
 <?php
 // declare namespace
-namespace Lib\Core\Class;
+namespace Lib\Core;
 
 // require routers
-require_once(__DIR__ . '/RequestClass.php');
-require_once(__DIR__ . '/ResponseClass.php');
-require_once(__DIR__ . '/RouterClass.php');
+require_once(__DIR__ . '/Request.php');
+require_once(__DIR__ . '/Response.php');
+require_once(__DIR__ . '/Router.php');
 
 // use interfaces
-use Lib\Core\Class\Request as HTTPRequest;
-use Lib\Core\Class\Response as HTTPResponse;
-use Lib\Core\Class\Router as HTTPRouter;
+use Lib\Core\Request as HTTPRequest;
+use Lib\Core\Response as HTTPResponse;
+use Lib\Core\Router as HTTPRouter;
 
 /**
  * Calabash main app
