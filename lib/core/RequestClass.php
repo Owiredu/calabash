@@ -2,16 +2,10 @@
 // declare namespace
 namespace Lib\Core\Class;
 
-// require modules
-require_once(__DIR__ . '/RequestInterface.php');
-
-// use namespaces
-use Lib\Core\Interface\Request as RequestInterface;
-
 /**
  * Request class
  */
-class Request implements RequestInterface
+class Request
 {
 
     public function __construct()

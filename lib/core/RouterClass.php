@@ -3,11 +3,11 @@
 namespace Lib\Core\Class;
 
 // require modules
-require_once(__DIR__ . '/RequestInterface.php');
+require_once(__DIR__ . '/RequestClass.php');
 require_once(__DIR__ . '/ResponseClass.php');
 
 // use namespaces
-use Lib\Core\Interface\Request as RequestInterface;
+use Lib\Core\Class\Request as HTTPRequest;
 use Lib\Core\Class\Response as HTTPResponse;
 
 /**
@@ -20,7 +20,7 @@ class Router
      * Request object
      * @var RequestInterface
      */
-    private RequestInterface $request;
+    private HTTPRequest $request;
 
     /**
      * Response object
@@ -37,7 +37,7 @@ class Router
         "POST",
     );
 
-    public function __construct(RequestInterface $request, HTTPResponse $response)
+    public function __construct(HTTPRequest $request, HTTPResponse $response)
     {
         // initialize the request and response objects
         $this->request = $request;
@@ -52,15 +52,32 @@ class Router
     public function __call($name, $args)
     {
         // get the route and the method that handles it from the arguments array
-        list($route, $method) = $args;
+        list($base_route, $router_class) = $args;
 
-        // set the method (together with its associated route) as a property of the instance of this class.
-        // this is stored as a dictionary where the dictionary name is the request method (get, post, etc).
-        // the index is the route string and the value is the callback function that handles that route.
-        // format: $this-> <method_name(get, post, etc)> [<route>] = <callback>
-        // eg. $this->get['/'] = function(...) {}
-        // eg. $this->get['/user'] = function(...) {}
-        $this->{strtolower($name)}[$this->format_route($route)] = $method;
+        // add the get routes
+        foreach ($router_class::$GET as $sub_route => $callback) {
+            // set the method (together with its associated route) as a property of the instance of this class.
+            // this is stored as a dictionary where the dictionary name is the request method (get, post, etc).
+            // the index is the route string and the value is the callback function that handles that route.
+            // format: $this-> <method_name(get, post, etc)> [<route>] = <callback>
+            // eg. $this->get['user/'] = function(...) {}
+            // eg. $this->get['/user/message'] = function(...) {}
+            // eg. $this->get['/user/exit'] = function(...) {}
+            $this->{"get"}[$this->format_route($base_route) . $this->format_route($sub_route)] = $callback;
+        }
+
+        // add the post routes
+        foreach ($router_class::$POST as $sub_route => $callback) {
+            // set the method (together with its associated route) as a property of the instance of this class.
+            // this is stored as a dictionary where the dictionary name is the request method (get, post, etc).
+            // the index is the route string and the value is the callback function that handles that route.
+            // format: $this-> <method_name(get, post, etc)> [<route>] = <callback>
+            // eg. $this->post['user/'] = function(...) {}
+            // eg. $this->post['/user/login'] = function(...) {}
+            // eg. $this->post['/user/register'] = function(...) {}
+            $this->{"post"}[$this->format_route($base_route) . $this->format_route($sub_route)] = $callback;
+        }
+
     }
 
     /**
