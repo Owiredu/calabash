@@ -5,7 +5,7 @@ require_once(__DIR__ . '/routes/UserRouter.php');
 
 // use interfaces
 use Lib\Core\Class\Calabash as App;
-use Routers\UserRouter as UserRouter;
+use Router\UserRouter as UserRouter;
 
 // initialize application
 $app = new App();

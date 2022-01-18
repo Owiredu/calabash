@@ -1,6 +1,6 @@
 <?php
 // declare namespace
-namespace Controllers;
+namespace Controller;
 
 // require modules
 require_once(__DIR__ . '/../models/UserModel.php');

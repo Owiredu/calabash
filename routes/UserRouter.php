@@ -1,13 +1,13 @@
 <?php
 // declare namespace
-namespace Routers;
+namespace Router;
 
 // require modules
 require_once(__DIR__ . '/../controllers/UserController.php');
 
 
 // use namespaces
-use Controllers\UserController as UserController;
+use Controller\UserController as UserController;
 
 /**
  * User router

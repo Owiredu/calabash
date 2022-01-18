@@ -1,6 +1,6 @@
 <?php
 // declare namespace
-namespace Models;
+namespace Model;
 
 /**
  * User model
