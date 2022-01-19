@@ -1,4 +1,7 @@
 <?php
+// set strict types
+declare(strict_types=1);
+
 // declare namespace
 namespace Lib\Core;
 
@@ -106,7 +109,7 @@ class Response {
         );
 
         // sends response 
-        echo json_encode($response_data, true);
+        echo json_encode($response_data, 1);
     }
 
 }
