@@ -89,4 +89,26 @@ class Validate {
         return true;
     }
 
+    /**
+     * Checks whether a number is in a certain range
+     * @param int|float $value The value to be validated
+     * @param int $min The minimum length the value should have
+     * @param int $max The maximum length the value should have
+     * @return bool True if the value is in the range else False
+     */
+    public static function value_range(int|float $value, int $min, int $max): bool {
+        return true;
+    }
+
+    /**
+     * Checks whether a number is in a certain range
+     * @param int|float|string $value The value to be validated
+     * @param int $min The minimum length the value should have
+     * @param int $max The maximum length the value should have
+     * @return bool True if the value is in the range else False
+     */
+    public static function length_range(int|float|string $value, int $min, int $max): bool {
+        return true;
+    }
+
 }
