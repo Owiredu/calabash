@@ -85,8 +85,8 @@ class Request
      */
     public function params()
     {
-        // parameters passed into the URL
-        return HelperFuncs::parse_query_str($this->queryString);
+        // decode the query string and parse it into a named array
+        return HelperFuncs::parse_query_str(urldecode($this->queryString));
     }
 
 }
