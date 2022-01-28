@@ -90,7 +90,9 @@ class Router
      */
     private function format_route($route): string
     {
-        $result = rtrim($route, '/');
+        // remove parameters from the request URL
+        // remove trailing '/'
+        $result = rtrim(preg_replace("/[?]{1}(.*)$/", "", $route), '/');
         if ($result === '') {
             return '/';
         }
@@ -119,6 +121,35 @@ class Router
             'error.html', 
             ['message' => 'Not Found', 'status' => 404]
         );
+    }
+
+    private function matchRoute($routes = [], $url = null, $method = 'GET')
+    {
+        // I used PATH_INFO instead of REQUEST_URI, because the 
+        // application may not be in the root direcory
+        // and we dont want stuff like ?var=value
+        $reqUrl = $url ?? $_SERVER['PATH_INFO'];
+        $reqMet = $method ?? $_SERVER['REQUEST_METHOD'];
+
+        $reqUrl = rtrim($reqUrl,"/");
+
+        foreach ($routes as $route) {
+            // convert urls like '/users/:uid/posts/:pid' to regular expression
+            // $pattern = "@^" . preg_replace('/\\\:[a-zA-Z0-9\_\-]+/', '([a-zA-Z0-9\-\_]+)', preg_quote($route['url'])) . "$@D";
+            $pattern = "@^" . preg_replace('/:[a-zA-Z0-9\_\-]+/', '([a-zA-Z0-9\-\_]+)', $route['url']) . "$@D";
+            // echo $pattern."\n";
+            $params = [];
+            // check if the current request params the expression
+            $match = preg_match($pattern, $reqUrl, $params);
+            if ($reqMet == $route['method'] && $match) {
+                // remove the first match
+                array_shift($params);
+                // call the callback with the matched positions as params
+                // return call_user_func_array($route['callback'], $params);
+                return [$route, $params];
+            }
+        }
+        return [];
     }
 
     /**

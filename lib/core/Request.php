@@ -5,6 +5,12 @@ declare(strict_types=1);
 // declare namespace
 namespace Lib\Core;
 
+// require modules
+require_once(__DIR__ . '/../auxiliary/HelperFuncs.php');
+
+// use namespaces
+use Lib\Auxiliary\HelperFuncs;
+
 /**
  * Request class
  */
@@ -51,24 +57,36 @@ class Request
 
     /**
      * Return the body of a request
-     * @return void|array The body of the request
+     * @return array The body of the request
      */
     public function body()
     {
-        // return no body data if the request is a get request
+        // create the body array
+        $body = array();
+
+        // return empty body data if the request is a get request
         if ($this->requestMethod === "GET") {
-            return;
+            return $body;
         }
 
         // return the data in a post request
         if ($this->requestMethod === "POST") {
-            $body = array();
             foreach ($_POST as $key => $value) {
                 $body[$key] = filter_input(INPUT_POST, $key, FILTER_SANITIZE_SPECIAL_CHARS);
             }
-
-            return $body;
         }
+
+        return $body;
+    }
+
+    /**
+     * Return the parameters in a request URL
+     * @return array The body of the request
+     */
+    public function params()
+    {
+        // parameters passed into the URL
+        return HelperFuncs::parse_query_str($this->queryString);
     }
 
 }

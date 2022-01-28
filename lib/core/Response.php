@@ -8,13 +8,15 @@ namespace Lib\Core;
 // require modules
 require_once(__DIR__ . '/../../php_modules/autoload.php');
 require_once(__DIR__ . '/Router.php');
+require_once(__DIR__ . '/../auxiliary/HelperFuncs.php');
 
-// use Twig modules
+// use namespaces
 use Twig\Loader\FilesystemLoader;
 use Twig\Environment;
+use Lib\Auxiliary\HelperFuncs;
 
 /**
- * Respons class
+ * Response class
  */
 class Response {
 
@@ -110,6 +112,18 @@ class Response {
 
         // sends response 
         echo json_encode($response_data, 1);
+    }
+
+    /**
+     * Redirects request to a specified route
+     * @param string $route The route to which the request is sent to
+     * @param bool $replace_header Whether to replace the previous header or not.
+     * @param int $status_code [optional] The status code to be returned
+     * @return never
+     */
+    public function redirect(string $route, bool $replace_header=true, int $status_code=302) {
+        header("Location: " . HelperFuncs::get_url_from_route($route), $replace_header, $status_code);
+        exit(0);
     }
 
 }
