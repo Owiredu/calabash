@@ -6,10 +6,12 @@ declare(strict_types=1);
 namespace Lib\Core;
 
 // require modules
+require_once(__DIR__ . '/../auxiliary/HelperFuncs.php');
 require_once(__DIR__ . '/Request.php');
 require_once(__DIR__ . '/Response.php');
 
 // use namespaces
+use Lib\Auxiliary\HelperFuncs;
 use Lib\Core\Request as HTTPRequest;
 use Lib\Core\Response as HTTPResponse;
 
@@ -90,9 +92,9 @@ class Router
      */
     private function format_route($route): string
     {
-        // remove parameters from the request URL
+        // remove query string from the request URL
         // remove trailing '/'
-        $result = rtrim(preg_replace("/[?]{1}(.*)$/", "", $route), '/');
+        $result = rtrim(HelperFuncs::remove_query_string_from_url($route), '/');
         if ($result === '') {
             return '/';
         }
@@ -123,33 +125,43 @@ class Router
         );
     }
 
-    private function matchRoute($routes = [], $url = null, $method = 'GET')
+    /**
+     * Finds the route that matches the URI pattern of the request
+     * @param array $method_dictionary This is a named array containing routes and their corresponding callback functions
+     *              for a particular request method
+     * @return null|array Either a named array of containing the selected route and parameters or NULL
+     */
+    private function match_route(array $method_dictionary, string $request_uri): null|array
     {
-        // I used PATH_INFO instead of REQUEST_URI, because the 
-        // application may not be in the root direcory
-        // and we dont want stuff like ?var=value
-        $reqUrl = $url ?? $_SERVER['PATH_INFO'];
-        $reqMet = $method ?? $_SERVER['REQUEST_METHOD'];
-
-        $reqUrl = rtrim($reqUrl,"/");
-
-        foreach ($routes as $route) {
+        foreach ($method_dictionary as $route => $callback) {
             // convert urls like '/users/:uid/posts/:pid' to regular expression
             // $pattern = "@^" . preg_replace('/\\\:[a-zA-Z0-9\_\-]+/', '([a-zA-Z0-9\-\_]+)', preg_quote($route['url'])) . "$@D";
-            $pattern = "@^" . preg_replace('/:[a-zA-Z0-9\_\-]+/', '([a-zA-Z0-9\-\_]+)', $route['url']) . "$@D";
-            // echo $pattern."\n";
+            $pattern = "@^" . preg_replace('/:[a-zA-Z0-9\_\-]+/', '([a-zA-Z0-9\-\_]+)', $route) . "$@D";
             $params = [];
             // check if the current request params the expression
-            $match = preg_match($pattern, $reqUrl, $params);
-            if ($reqMet == $route['method'] && $match) {
-                // remove the first match
+            $match = preg_match($pattern, $request_uri, $params);
+            if ($match) {
+                // remove the first match, which is the full URI
                 array_shift($params);
+                // replace the numerical indices with the exact parameter names
+                $params_names = [];
+                $match = preg_match_all('/:[a-zA-Z0-9\_\-]+/', $route, $params_names);
+                if ($match) {
+                    foreach($params as $index => $value) {
+                        $new_key = ltrim($params_names[0][$index], ':');
+                        $params[$new_key] = $value;
+                        unset($params[$index]);
+                    }
+                }
                 // call the callback with the matched positions as params
                 // return call_user_func_array($route['callback'], $params);
-                return [$route, $params];
+                return [
+                    "route" => $route, 
+                    "params" => $params
+                ];
             }
         }
-        return [];
+        return null;
     }
 
     /**
@@ -169,15 +181,20 @@ class Router
 
         // format the request URI and use the resulting value as the route
         $formatted_route = $this->format_route($this->request->requestUri);
-        
-        // get the method associated with that route
-        $method = $method_dictionary[$formatted_route];
+        // find the route that matches the request URI
+        $route_match_result = $this->match_route($method_dictionary, $formatted_route);
 
-        // if no method is associated with the route, send a not found response
-        if (is_null($method)) {
+        // if no match is found for the route, send a not found response
+        if (is_null($route_match_result)) {
             $this->default_request_handler();
             return;
         }
+
+        // get the method associated with that route
+        $method = $method_dictionary[$route_match_result["route"]];
+
+        // add the matching parameters in the URL string to the request object
+        $this->request->set_uri_params($route_match_result["params"]);
 
         // if a method is found for the route, call the associated callback function,
         // passing in the request and response objects as arguments

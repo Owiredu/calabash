@@ -17,6 +17,12 @@ use Lib\Auxiliary\HelperFuncs;
 class Request
 {
 
+    /**
+     * Named array for holding values in dynamic URLs
+     * @var array
+     */
+    private array $uri_params = [];
+
     public function __construct()
     {
         $this->bootstrap_self();
@@ -87,6 +93,22 @@ class Request
     {
         // decode the query string and parse it into a named array
         return HelperFuncs::parse_query_str(urldecode($this->queryString));
+    }
+
+    /**
+     * Sets the URI params extracted from a dynamic URI
+     * @param array $named_array A named or empty array of the dynamic URI params
+     */
+    public function set_uri_params(array $named_array) {
+        $this->uri_params = $named_array;
+    }
+
+    /**
+     * Returns the URI params named array
+     * @return array The dynamic URI params named array
+     */
+    public function get_dynamic_uri_params(): array {
+        return $this->uri_params;
     }
 
 }

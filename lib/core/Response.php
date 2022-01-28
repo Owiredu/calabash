@@ -115,7 +115,7 @@ class Response {
     }
 
     /**
-     * Redirects request to a specified route
+     * Redirects response to a specified route
      * @param string $route The route to which the request is sent to
      * @param bool $replace_header Whether to replace the previous header or not.
      * @param int $status_code [optional] The status code to be returned

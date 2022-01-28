@@ -12,13 +12,24 @@ class HelperFuncs
 {
 
     /**
+     * Removes query string from a URI
+     * @param string $uri The URI
+     * @return string The request URI without the query string
+     */
+    public static function remove_query_string_from_url(string $uri): string
+    {
+        return preg_replace("/[?]{1}(.*)$/", "", $uri);
+    }
+
+    /**
      * Returns the full URL, including the query string when given a route
      * @param string $route The route to be use for composing the URL
      * @return string The fully composed URL
      */
-    public static function get_url_from_route(string $route): string {
+    public static function get_url_from_route(string $route): string
+    {
         // formulate the base URL
-        $base_url = (stripos($_SERVER['SERVER_PROTOCOL'],'https') === 0 ? 'https://' : 'http://') . $_SERVER["HTTP_HOST"] . "/";
+        $base_url = (stripos($_SERVER['SERVER_PROTOCOL'], 'https') === 0 ? 'https://' : 'http://') . $_SERVER["HTTP_HOST"] . "/";
         // get the query string
         $query_string = $_SERVER["QUERY_STRING"];
         // remove leading and trailing '/' from the route
@@ -38,12 +49,12 @@ class HelperFuncs
         if ($str) {
             # split on outer delimiter
             $pairs = explode('&', $str);
-    
+
             # loop through each pair
             foreach ($pairs as $i) {
                 # split into name and value
                 list($name, $value) = explode('=', $i, 2);
-    
+
                 # if name already exists
                 if (isset($arr[$name])) {
                     # stick multiple values into an array

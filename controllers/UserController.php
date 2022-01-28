@@ -34,4 +34,9 @@ class UserController {
         // $response->redirect("calabash/user/info");
     }
 
+    public static function dynamic_route($request, $response) {
+        // var_dump($request->get_dynamic_uri_params()["id"]);
+        $response->render('index.html', ['name' => "Dynamo because I am the dynamic route"]);
+    }
+
 }

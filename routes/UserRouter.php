@@ -22,7 +22,8 @@ class UserRouter {
      */
     public static $GET = [
         "/message" => [UserController::class, "hello"],
-        "/info" => [UserController::class, "info"]
+        "/info" => [UserController::class, "info"],
+        "/:id/:param/dyn" => [UserController::class, "dynamic_route"]
     ];
 
     /**
