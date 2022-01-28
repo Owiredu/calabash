@@ -194,7 +194,7 @@ class Router
         $method = $method_dictionary[$route_match_result["route"]];
 
         // add the matching parameters in the URL string to the request object
-        $this->request->set_uri_params($route_match_result["params"]);
+        $this->request->set_dynamic_uri_params($route_match_result["params"]);
 
         // if a method is found for the route, call the associated callback function,
         // passing in the request and response objects as arguments

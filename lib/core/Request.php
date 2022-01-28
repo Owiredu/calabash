@@ -99,7 +99,7 @@ class Request
      * Sets the URI params extracted from a dynamic URI
      * @param array $named_array A named or empty array of the dynamic URI params
      */
-    public function set_uri_params(array $named_array) {
+    public function set_dynamic_uri_params(array $named_array) {
         $this->uri_params = $named_array;
     }
 
