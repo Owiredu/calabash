@@ -10,7 +10,7 @@ require_once(__DIR__ . '/Request.php');
 require_once(__DIR__ . '/Response.php');
 require_once(__DIR__ . '/Router.php');
 
-// use interfaces
+// use namespaces
 use Lib\Core\Request as HTTPRequest;
 use Lib\Core\Response as HTTPResponse;
 use Lib\Core\Router as HTTPRouter;

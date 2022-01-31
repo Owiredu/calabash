@@ -1,0 +1,5 @@
+# Allow only asset files to be accessible from this directory
+<FilesMatch ".(exe|ini|psd|log|sh|php|py|cpp)">
+    Order Deny,Allow
+    Deny From All
+</FilesMatch>

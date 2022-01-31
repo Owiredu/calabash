@@ -1,0 +1,6 @@
+# Allow only php files to be accessible from this directory
+Order Deny,Allow
+Deny From All
+<FilesMatch ".(php)">
+    Allow From All
+</FilesMatch>
