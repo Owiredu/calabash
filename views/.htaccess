@@ -1,6 +1,0 @@
-# Allow only HTML files to be accessible from this directory
-Order Deny,Allow
-Deny From All
-<FilesMatch ".(html)">
-    Allow From All
-</FilesMatch>
