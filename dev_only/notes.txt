@@ -1,0 +1,6 @@
+UPDATING THE SUPPORTED ASSETS EXTENSIONS.
+
+1. Add the extension to the list of extensions in the .htaccess file in the root directory of the project.
+
+2. Add the extension to the list of extensions in the /lib/middleware/AssetsHandler.php. 
+    Just add the new extension to the SUPPORTED_ASSETS_EXTENTIONS constant string array.
