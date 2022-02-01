@@ -3,12 +3,12 @@
 declare(strict_types=1);
 
 // declare namespace
-namespace Lib\Core;
+namespace Lib\App;
 
 // require routers
-require_once(__DIR__ . '/Request.php');
-require_once(__DIR__ . '/Response.php');
-require_once(__DIR__ . '/Router.php');
+require_once(__DIR__ . '/core/Request.php');
+require_once(__DIR__ . '/core/Response.php');
+require_once(__DIR__ . '/core/Router.php');
 
 // use namespaces
 use Lib\Core\Request as HTTPRequest;

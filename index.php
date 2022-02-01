@@ -1,10 +1,10 @@
 <?php
 // require modules
-require_once __DIR__ . '/lib/core/Calabash.php';
+require_once __DIR__ . '/lib/Calabash.php';
 require_once __DIR__ . '/routes/UserRouter.php';
 
 // use namespaces
-use Lib\Core\Calabash;
+use Lib\App\Calabash;
 use Router\UserRouter;
 
 // initialize application
