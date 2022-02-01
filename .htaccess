@@ -9,5 +9,5 @@ RewriteBase /calabash/
 
 # Redirect requests to index.php
 RewriteCond %{REQUEST_URI} !=/calabash/index.php
-RewriteCond %{REQUEST_URI} !.*\.(png|jpg|jpeg|gif|ico|css|js)$ [NC]
+RewriteCond %{REQUEST_URI} !.*\.(png|jpg|jpeg|gif|ico|bmp|svg|webp|avi|m4v|mov|mp4|mpeg|ogv|qt|webm|wmv|aac|m4a|mp3|oga|ogg|wav|wave|css|js|ts)$ [NC]
 RewriteRule .* /calabash/index.php

@@ -16,8 +16,10 @@ class AssetsHandler
      * @var string[]
      */
     public const SUPPORTED_ASSET_EXTENSIONS = [
-        "png", "jpg", "jpeg", "gif", "ico",
-        "css", "js"
+        "png", "jpg", "jpeg", "gif", "ico", "bmp", "svg", "webp",
+        "avi", "m4a", "mov", "mp4", "mpeg", "ogv", "qt", "webm", "wmv", // https://support.google.com/webdesigner/answer/6137261?hl=en
+        "aac", "m4a", "mp3", "oga", "ogg", "wav", "wave",
+        "css", "js", "ts"
     ];
 
     /**
