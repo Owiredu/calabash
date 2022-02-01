@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 // declare namespace
-namespace Lib\Core;
+namespace Lib\Middleware;
 
 /**
  * Cross-site Request Forgery (CSRF) Protection class
