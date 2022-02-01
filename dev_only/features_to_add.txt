@@ -11,3 +11,5 @@
 6. Implement cross-site request forgery. ❌
 
 7. Implement other security stuff. ❌
+
+8. Restrict assets to public directory ✅

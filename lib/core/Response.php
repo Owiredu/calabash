@@ -6,14 +6,16 @@ declare(strict_types=1);
 namespace Lib\Core;
 
 // require modules
-require_once(__DIR__ . '/../../php_modules/autoload.php');
 require_once(__DIR__ . '/Router.php');
+require_once(__DIR__ . '/../middleware/AssetsHandler.php');
 require_once(__DIR__ . '/../auxiliary/HelperFuncs.php');
+require_once(__DIR__ . '/../../php_modules/autoload.php');
 
 // use namespaces
 use Twig\Loader\FilesystemLoader;
 use Twig\Environment;
 use Lib\Auxiliary\HelperFuncs;
+use Lib\Middleware\AssetsHandler;
 
 /**
  * Response class
@@ -93,7 +95,7 @@ class Response {
      */
     public function render(string $template_name, array $context = []) {
         // send response
-        echo $this->twig->render($template_name, $context);
+        echo AssetsHandler::handle_asset_routes($this->twig->render($template_name, $context));
     }
 
     /**

@@ -1,10 +1,20 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Index</title>
-        <link rel="icon" type="image/x-icon" href="public/favicon.ico">
-    </head>
-    <body>
-        <h1>Hello {{ name }}</h1>
-    </body>
+
+<head>
+    <title>Index</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+
+<body>
+    <h1>Hello {{ name }}</h1>
+    <a href='favicon.ico'>icon</a>
+    <img width="100px" src='https://www.freeimages.com/static/favicon/android-icon-192x192.png'>
+    <picture>
+        <source srcset="favicon.ico" media="(min-width:650px)" />
+        <source media="(min-width:650px)" srcset="favicon.ico">
+        <img width="100px" src='favicon.ico '>
+    </picture>
+</body>
+
 </html>
