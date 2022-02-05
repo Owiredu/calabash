@@ -13,3 +13,7 @@
 7. Implement other security stuff. ❌
 
 8. Restrict assets to public directory ✅
+
+9. Provide function for accessing files from post requests. ❌
+
+10. Get and set session values using the request object. ❌

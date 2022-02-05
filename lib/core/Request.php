@@ -86,6 +86,18 @@ class Request
     }
 
     /**
+     * Return the files of a request
+     * @return array The body of the request
+     */
+    public function files()
+    {
+        // create the files array
+        $files = array();
+
+        return $files;
+    }
+
+    /**
      * Return the parameters in a request URL
      * @return array The body of the request
      */
