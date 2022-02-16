@@ -120,7 +120,7 @@ class Router
     {
         header("{$this->request->serverProtocol} 404 Not Found");
         $this->response->render(
-            'error.html.twig', 
+            'error.html.twig',
             ['message' => 'Not Found', 'status' => 404]
         );
     }

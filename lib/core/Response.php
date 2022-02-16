@@ -95,7 +95,11 @@ class Response {
      */
     public function render(string $template_name, array $context = []) {
         // send response
-        echo AssetsHandler::handle_asset_routes($this->twig->render($template_name, $context));
+        echo HelperFuncs::insert_head_element(
+            AssetsHandler::handle_asset_routes($this->twig->render($template_name, $context)), 
+            "base", 
+            array("href" => "/")
+        );
     }
 
     /**

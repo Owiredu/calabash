@@ -37,6 +37,25 @@ class HelperFuncs
     }
 
     /**
+     * Inserts a header elements (without closing tags) into the head section of an html page
+     * @param string $html_content The content of the html page
+     * @param string $tag_name The name of the tag to insert
+     * @param array $attrib_name_val_pairs An associative array of the name and value pairs of the attributes to pass into the element
+     * @return string The processed html content
+     */
+    public static function insert_head_element(string $html_content, string $tag_name, array $attrib_name_val_pairs) {
+        $meta_element = "<$tag_name";
+
+        foreach ($attrib_name_val_pairs as $name => $val) {
+            $meta_element .= " $name=\"$val\"";
+        }
+
+        $meta_element .= ">";
+
+        return str_replace("</head>", $meta_element . "</head>", $html_content);
+    }
+
+    /**
      * Parses a query string from a URL
      * @param string $str The query string. Eg. ```id=1&name=John```
      * @return array A named array of the parameters in the query string
