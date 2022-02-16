@@ -3,13 +3,13 @@
 declare(strict_types=1);
 
 // declare namespace
-namespace Lib\Core;
+namespace Calabash\Core;
 
 // require modules
 require_once(__DIR__ . '/../auxiliary/HelperFuncs.php');
 
 // use namespaces
-use Lib\Auxiliary\HelperFuncs;
+use Calabash\Auxiliary\HelperFuncs;
 
 /**
  * Request class
@@ -87,14 +87,12 @@ class Request
 
     /**
      * Return the files of a request
-     * @return array The body of the request
+     * @return array The uploaded files
      */
     public function files()
     {
         // create the files array
-        $files = array();
-
-        return $files;
+        return $_FILES;
     }
 
     /**
@@ -121,6 +119,32 @@ class Request
      */
     public function get_dynamic_uri_params(): array {
         return $this->uri_params;
+    }
+
+    /**
+     * Sets a session value
+     * @param string $name The name of the value
+     * @param mixed $value The value
+     */
+    public function set_session_value(string $name, mixed $value) {
+        $_SESSION[$name] = $value;
+    }
+
+    /**
+     * Gets a session value
+     * @param string $name The name of the session value
+     * @return mixed The session value
+     */
+    public function get_session_value(string $name): mixed {
+        $_SESSION[$name];
+    }
+
+    /**
+     * Gets the session object
+     * @return array An associative array containing session variables available to the current script.
+     */
+    public function get_session(): array {
+        return $_SESSION;
     }
 
 }

@@ -4,7 +4,7 @@ require_once __DIR__ . '/lib/Calabash.php';
 require_once __DIR__ . '/routes/UserRouter.php';
 
 // use namespaces
-use Lib\App\Calabash;
+use Calabash\App\Calabash;
 use Router\UserRouter;
 
 // initialize application

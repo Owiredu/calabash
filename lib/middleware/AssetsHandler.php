@@ -3,7 +3,7 @@
 declare (strict_types = 1);
 
 // declare namespace
-namespace Lib\Middleware;
+namespace Calabash\Middleware;
 
 /**
  * Assets Handler class

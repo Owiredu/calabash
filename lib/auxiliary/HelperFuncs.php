@@ -3,7 +3,7 @@
 declare (strict_types = 1);
 
 // declare namespace
-namespace Lib\Auxiliary;
+namespace Calabash\Auxiliary;
 
 /**
  * Helper Functions

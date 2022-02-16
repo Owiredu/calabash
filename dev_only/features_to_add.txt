@@ -14,6 +14,6 @@
 
 8. Restrict assets to public directory ✅
 
-9. Provide function for accessing files from post requests. ❌
+9. Provide function for accessing files from post requests. ✅
 
-10. Get and set session values using the request object. ❌
+10. Get and set session values using the request object. ✅

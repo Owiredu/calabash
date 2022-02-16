@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 // declare namespace
-namespace Lib\Core;
+namespace Calabash\Core;
 
 // require modules
 require_once(__DIR__ . '/../auxiliary/HelperFuncs.php');
@@ -11,9 +11,9 @@ require_once(__DIR__ . '/Request.php');
 require_once(__DIR__ . '/Response.php');
 
 // use namespaces
-use Lib\Auxiliary\HelperFuncs;
-use Lib\Core\Request as HTTPRequest;
-use Lib\Core\Response as HTTPResponse;
+use Calabash\Auxiliary\HelperFuncs;
+use Calabash\Core\Request as HTTPRequest;
+use Calabash\Core\Response as HTTPResponse;
 
 /**
  * Router class

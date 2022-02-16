@@ -30,6 +30,9 @@ class UserController {
         // send response
         // var_dump($request->body());
         // var_dump($request->params());
+        // var_dump($request->files());
+        $request->set_session_value("test_name", "sheep in skin");
+        var_dump($request->get_session());
         $response->json(["message" => "Login successful"]);
         // $response->redirect("calabash/user/info");
     }

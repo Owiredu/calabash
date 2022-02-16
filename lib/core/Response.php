@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 // declare namespace
-namespace Lib\Core;
+namespace Calabash\Core;
 
 // require modules
 require_once(__DIR__ . '/Router.php');
@@ -14,8 +14,8 @@ require_once(__DIR__ . '/../../php_modules/autoload.php');
 // use namespaces
 use Twig\Loader\FilesystemLoader;
 use Twig\Environment;
-use Lib\Auxiliary\HelperFuncs;
-use Lib\Middleware\AssetsHandler;
+use Calabash\Auxiliary\HelperFuncs;
+use Calabash\Middleware\AssetsHandler;
 
 /**
  * Response class
