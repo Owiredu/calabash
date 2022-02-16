@@ -122,12 +122,12 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Symfony\\Polyfill\\Mbstring\\": ""
-                },
                 "files": [
                     "bootstrap.php"
-                ]
+                ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Mbstring\\": ""
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -177,12 +177,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "871747851f17892de24dda275060ad88369baba4"
+                "reference": "237f1789a7db3a0cbb8e28a75832a45b7f9fc304"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/871747851f17892de24dda275060ad88369baba4",
-                "reference": "871747851f17892de24dda275060ad88369baba4",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/237f1789a7db3a0cbb8e28a75832a45b7f9fc304",
+                "reference": "237f1789a7db3a0cbb8e28a75832a45b7f9fc304",
                 "shasum": ""
             },
             "require": {
@@ -246,7 +246,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-01-14T12:05:32+00:00"
+            "time": "2022-02-04T07:03:10+00:00"
         }
     ],
     "packages-dev": [],
