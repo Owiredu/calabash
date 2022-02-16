@@ -15,7 +15,7 @@ class UserController {
         // send response
         // var_dump($request->body());
         // var_dump($request->params());
-        $response->render('index.html', ['name' => "Nana Kofi"]);
+        $response->render('index.html.twig', ['name' => "Nana Kofi"]);
         // $response->redirect("calabash/user/info");
     }
 
@@ -23,7 +23,7 @@ class UserController {
         // send response
         // var_dump($request->body());
         // var_dump($request->params());
-        $response->render('index.html', ['name' => "Nana Kofi. This is the info response"]);
+        $response->render('index.html.twig', ['name' => "Nana Kofi. This is the info response"]);
     }
 
     public static function login($request, $response) {
@@ -39,7 +39,7 @@ class UserController {
 
     public static function dynamic_route($request, $response) {
         // var_dump($request->get_dynamic_uri_params()["id"]);
-        $response->render('index.html', ['name' => "Dynamo because I am the dynamic route"]);
+        $response->render('index.html.twig', ['name' => "Dynamo because I am the dynamic route"]);
     }
 
 }

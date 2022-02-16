@@ -108,7 +108,7 @@ class Router
     {
         header("{$this->request->serverProtocol} 405 Method Not Allowed");
         $this->response->render(
-            'error.html', 
+            'error.html.twig', 
             ['message' => "Method Not Allowed", 'status' => 405]
         );
     }
@@ -120,7 +120,7 @@ class Router
     {
         header("{$this->request->serverProtocol} 404 Not Found");
         $this->response->render(
-            'error.html', 
+            'error.html.twig', 
             ['message' => 'Not Found', 'status' => 404]
         );
     }
