@@ -1,1 +1,1 @@
-1. Replace all /calabash prefix in all routes with an empty string.
+1. Replace all  prefix in all routes with an empty string.

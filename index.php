@@ -16,7 +16,7 @@ $app->set_cookies(
     $value = uniqid("calabash_", $more_entropy = true),
     $options = [
         'expires' => time() + 60 * 60 * 24 * 30, // expires after 30 days
-        'path' => '/calabash',
+        'path' => '/',
         'domain' => 'localhost', // eg. '.example.com', leading dot for compatibility or use subdomain
         'secure' => true, // or false
         'httponly' => true, // or false
@@ -25,4 +25,4 @@ $app->set_cookies(
 );
 
 // add routers
-$app->add_router('/calabash/user', UserRouter::class);
+$app->add_router('/user', UserRouter::class);

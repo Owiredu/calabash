@@ -5,10 +5,10 @@ RewriteEngine On
 Options +FollowSymLinks
 
 # Installation directory
-RewriteBase /calabash/
+RewriteBase /
 
 # Redirect requests to index.php
-RewriteCond %{REQUEST_URI} !=/calabash/index.php
+RewriteCond %{REQUEST_URI} !=/index.php
 RewriteCond %{REQUEST_URI} !.*\.png$ [NC]
 RewriteCond %{REQUEST_URI} !.*\.jpg$ [NC]
 RewriteCond %{REQUEST_URI} !.*\.jpeg$ [NC]
@@ -16,7 +16,7 @@ RewriteCond %{REQUEST_URI} !.*\.gif$ [NC]
 RewriteCond %{REQUEST_URI} !.*\.ico$ [NC]
 RewriteCond %{REQUEST_URI} !.*\.css$ [NC]
 RewriteCond %{REQUEST_URI} !.*\.js$ [NC]
-RewriteRule .* /calabash/index.php
+RewriteRule .* index.php
 
 # To externally redirect /dir/foo.php to /dir/foo
 RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s([^.]+)\.php [NC]
@@ -48,4 +48,4 @@ RewriteRule ^ %1/ [R=301,L]
 
 # # Rewrite all other URLs to index.php/URL
 # RewriteRule .* index.php [PT]
-# Redirect /calabash/*.* /calabash/index.php
+# Redirect /*.* index.php

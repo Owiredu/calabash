@@ -30,7 +30,7 @@ class AssetsHandler
      * @param string $prefix The prefix to be used
      * @return string The resulting URI after examination and edit (if necessary)
      */
-    private static function get_uri_prefix(string $uri, string $prefix="/calabash/public/"): string
+    private static function get_uri_prefix(string $uri, string $prefix="/public/"): string
     {
     $protocols = ["file://", "http://", "https://", "rstp://"/*, "/"*/]; // do not support absolute paths.
         foreach ($protocols as $p) {
