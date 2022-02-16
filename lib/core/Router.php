@@ -181,7 +181,7 @@ class Router
 
         // format the request URI and use the resulting value as the route
         $formatted_route = $this->format_route($this->request->requestUri);
-        // find the route that matches the request URI
+        // find the route that matches the request URI. Try with and without a trailing forward slash
         $route_match_result = $this->match_route($method_dictionary, $formatted_route) ?? $this->match_route($method_dictionary, $formatted_route . "/");
 
         // if no match is found for the route, send a not found response
