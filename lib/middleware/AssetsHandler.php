@@ -19,7 +19,7 @@ class AssetsHandler
         "png", "jpg", "jpeg", "gif", "ico", "bmp", "svg", "webp",
         "avi", "m4a", "mov", "mp4", "mpeg", "ogv", "qt", "webm", "wmv", // https://support.google.com/webdesigner/answer/6137261?hl=en
         "aac", "m4a", "mp3", "oga", "ogg", "wav", "wave",
-        "css", "js", "ts"
+        "css", "js", "ts", "html", "xhtml", "htm"
     ];
 
     /**
@@ -53,6 +53,9 @@ class AssetsHandler
         // supported asset extensions
         $supported_asset_extensions = join("|", self::SUPPORTED_ASSET_EXTENSIONS);
 
+        // define patterns for CSS url(...)
+        $pattern_url_1 = "/url[\s]*[(][\s]*[\"']{0,1}(.*)(\.(" . $supported_asset_extensions . "))[\"']{0,1}[\s]*[)]/i";
+
         // define patterns for href
         $pattern_href_1 = "/<[\s]{0,}(a|link|area|base)[\s]+href[\s]{0,}=[\s]{0,}(?:(?:\"([^\"]+)(\.(" . $supported_asset_extensions . ")[\s]{0,})\"))/i"; // use case: <a href="fish.jpg" rel="icon" type="image/x-icon"/>
         $pattern_href_2 = "/<[\s]{0,}(a|link|area|base)[\s]+href[\s]{0,}=[\s]{0,}(?:(?:\'([^\']+)(\.(" . $supported_asset_extensions . ")[\s]{0,})\'))/i"; // use case: <a href='fish.jpg' rel="icon" type="image/x-icon" />
@@ -74,6 +77,9 @@ class AssetsHandler
         // make replacements
         $result = preg_replace_callback_array(
             [
+                // for url
+                $pattern_url_1 => fn(array $matches) => 'url("' . self::get_uri_prefix($matches[1]) . $matches[1] . $matches[2] . '")',
+
                 // for href
                 $pattern_href_1 => fn(array $matches) => '<' . $matches[1] . ' href="' . self::get_uri_prefix($matches[2]) . $matches[2] . $matches[3] . '"',
                 $pattern_href_2 => fn(array $matches) => '<' . $matches[1] . ' href="' . self::get_uri_prefix($matches[2]) . $matches[2] . $matches[3] . '"',
