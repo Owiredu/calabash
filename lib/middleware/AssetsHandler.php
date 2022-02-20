@@ -19,7 +19,8 @@ class AssetsHandler
         "png", "jpg", "jpeg", "gif", "ico", "bmp", "svg", "webp",
         "avi", "m4a", "mov", "mp4", "mpeg", "ogv", "qt", "webm", "wmv", // https://support.google.com/webdesigner/answer/6137261?hl=en
         "aac", "m4a", "mp3", "oga", "ogg", "wav", "wave",
-        "css", "js", "ts", "html", "xhtml", "htm"
+        "css", "js", "ts", "html", "xhtml", "htm", "json",
+        "pdf", "docx", "doc", "ppt", "pptx", "txt", "xlsx", "xls"
     ];
 
     /**
@@ -32,7 +33,7 @@ class AssetsHandler
      */
     private static function get_uri_prefix(string $uri, string $prefix="/public/"): string
     {
-    $protocols = ["file://", "http://", "https://", "rstp://"/*, "/"*/]; // do not support absolute paths.
+    $protocols = ["file://", "http://", "https://", "rstp://", "ftp://", "sftp://"/*, "/"*/]; // do not support absolute paths.
         foreach ($protocols as $p) {
             if (substr(ltrim($uri), 0, strlen($p)) === $p) {
                 return "";
@@ -68,7 +69,7 @@ class AssetsHandler
         $pattern_src_3 = "/<[\s]{0,}(img|script|audio|video|embed|iframe|input|source|track)([^>]+)[\s]src[\s]{0,}=[\s]{0,}(?:(?:\"([^\"]+)(\.(" . $supported_asset_extensions . ")[\s]{0,})\"))/i"; // use case: <img width="100px" src="favicon.ico">
         $pattern_src_4 = "/<[\s]{0,}(img|script|audio|video|embed|iframe|input|source|track)([^>]+)[\s]src[\s]{0,}=[\s]{0,}(?:(?:\'([^\']+)(\.(" . $supported_asset_extensions . ")[\s]{0,})\'))/i"; // use case: <img width="100px" src='favicon.ico'>
 
-        // define patterns for src
+        // define patterns for srcset
         $pattern_srcset_1 = "/<[\s]{0,}(source)[\s]+srcset[\s]{0,}=[\s]{0,}(?:(?:\"([^\"]+)(\.(" . $supported_asset_extensions . ")[\s]{0,})\"))/i"; // use case: <source srcset="fish.jpg" media="(min-width:650px)"/>
         $pattern_srcset_2 = "/<[\s]{0,}(source)[\s]+srcset[\s]{0,}=[\s]{0,}(?:(?:\'([^\']+)(\.(" . $supported_asset_extensions . ")[\s]{0,})\'))/i"; // use case: <source srcset='fish.jpg' media="(min-width:650px)" />
         $pattern_srcset_3 = "/<[\s]{0,}(source)([^>]+)[\s]srcset[\s]{0,}=[\s]{0,}(?:(?:\"([^\"]+)(\.(" . $supported_asset_extensions . ")[\s]{0,})\"))/i"; // use case: <source media="(min-width:650px)" srcset="favicon.ico">
