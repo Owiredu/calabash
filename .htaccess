@@ -9,5 +9,5 @@ RewriteBase /
 
 # Redirect requests to index.php
 RewriteCond %{REQUEST_URI} !=index.php
-RewriteCond %{REQUEST_URI} !.*\.(png|jpg|jpeg|gif|ico|bmp|svg|webp|avi|m4v|mov|mp4|mpeg|ogv|qt|webm|wmv|aac|m4a|mp3|oga|ogg|wav|wave|css|js|ts)$ [NC]
+RewriteCond %{REQUEST_URI} !.*\.(png|jpg|jpeg|gif|ico|bmp|svg|webp|avi|m4v|mov|mp4|mpeg|ogv|qt|webm|wmv|aac|m4a|mp3|oga|ogg|wav|wave|css|js|ts|html|xhtml|htm|json|pdf|docx|doc|ppt|pptx|txt|xlsx|xls)$ [NC]
 RewriteRule .* index.php
