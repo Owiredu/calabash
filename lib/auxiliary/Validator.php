@@ -32,6 +32,15 @@ class Validator {
     }
 
     /**
+     * Validates a name. Thus checks whether the name has length from 1 to 50
+     * @param string $phone The name to be validated
+     * @return bool True if the name is valid else False
+     */
+    public static function is_valid_name(string $name): bool {
+        return boolval(preg_match(RegExp::REQUIRED_NAME_REGEX, $name, $matches));
+    }
+
+    /**
      * Checks whether a given string is an integer
      * @param string $value The value to be validated
      * @return bool True if the value is a valid integer else False
