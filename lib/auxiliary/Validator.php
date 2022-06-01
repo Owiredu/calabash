@@ -32,20 +32,20 @@ class Validator {
     }
 
     /**
-     * Checks whether a given value is an integer
-     * @param int|string $value The value to be validated
+     * Checks whether a given string is an integer
+     * @param string $value The value to be validated
      * @return bool True if the value is a valid integer else False
      */
-    public static function is_valid_integer(int|string $value): bool {
+    public static function is_valid_integer(string $value): bool {
         return true;
     }
 
     /**
      * Checks whether a given value is a floating point number
-     * @param float|string $value The value to be validated
+     * @param string $value The value to be validated
      * @return bool True if the value is a valid floating point number else False
      */
-    public static function is_valid_float(float|string $value): bool {
+    public static function is_valid_float(string $value): bool {
         return true;
     }
 
@@ -87,11 +87,11 @@ class Validator {
 
     /**
      * Checks whether a given value has a specified length
-     * @param int|float|string $value The value to be validated
+     * @param string $value The value to be validated
      * @param int $length The expected length of the value
      * @return bool True if the value has the expected length else False
      */
-    public static function is_valid_length(int|float|string $value, int $length): bool {
+    public static function is_valid_length(string $value, int $length): bool {
         return true;
     }
 

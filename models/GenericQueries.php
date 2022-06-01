@@ -11,11 +11,17 @@ use Config\DBConnection;
 class GenericQueries extends DBConnection
 {
 
-    // create database connection object
+    /**
+     * Database connection object
+     * @var PDO|null
+     */
     protected $db_connection = null;
 
-    // set the database table name
-    protected $table_name = "";
+    /**
+     * Database table name
+     * @var string
+     */
+    protected string $table_name = "";
 
     public function __construct()
     {

@@ -24,14 +24,17 @@ class DBConnection
     const DATABASE = "teltita";
     const PORT = 3306;
 
-    // initialize the connection object
+    /**
+     * Database connection object
+     * @var PDO|null
+     */
     protected $conn = null;
 
     /**
      * Creates and returns a connection to the database
-     * @return PDO PHP Data Object
+     * @return PDO|null PHP Data Object or null
      */
-    final protected function open_connection()
+    final protected function open_connection(): PDO|null
     {
         try {
             // set connection options
