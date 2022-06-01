@@ -5,18 +5,21 @@ declare(strict_types=1);
 // declare namespace
 namespace Calabash\Auxiliary;
 
+// require modules
+require_once __DIR__ . '/RegExp.php';
+
 /**
  * Validation class
  */
-class Validate {
+class Validator {
 
     /**
      * Validates an email address
      * @param string $email The email address to validate
      * @return bool True if the email is valid else False
      */
-    public static function email(string $email): bool {
-        return true;
+    public static function is_valid_email(string $email): bool {
+        return boolval(preg_match(RegExp::REQUIRED_EMAIL_REGEX, $email, $matches));
     }
 
     /**
@@ -24,8 +27,8 @@ class Validate {
      * @param string $phone The phone number to be validated
      * @return bool True if the phone number is valid else False
      */
-    public static function phone(string $phone): bool {
-        return true;
+    public static function is_valid_phone(string $phone): bool {
+        return boolval(preg_match(RegExp::REQUIRED_PHONE_NUMBER_REGEX, $phone, $matches));
     }
 
     /**
@@ -33,7 +36,7 @@ class Validate {
      * @param int|string $value The value to be validated
      * @return bool True if the value is a valid integer else False
      */
-    public static function integer(int|string $value): bool {
+    public static function is_valid_integer(int|string $value): bool {
         return true;
     }
 
@@ -42,7 +45,7 @@ class Validate {
      * @param float|string $value The value to be validated
      * @return bool True if the value is a valid floating point number else False
      */
-    public static function float(float|string $value): bool {
+    public static function is_valid_float(float|string $value): bool {
         return true;
     }
 
@@ -51,7 +54,7 @@ class Validate {
      * @param string $string The string to be validated
      * @return bool True if the string contains only alphabets else False
      */
-    public static function alpha(string $string): bool {
+    public static function is_valid_alpha(string $string): bool {
         return true;
     }
 
@@ -60,7 +63,7 @@ class Validate {
      * @param string $string The string to be validated
      * @return bool True if the string contains only numbers else False
      */
-    public static function numeric(string $string): bool {
+    public static function is_valid_numeric(string $string): bool {
         return true;
     }
 
@@ -69,7 +72,7 @@ class Validate {
      * @param string $string The string to be validated
      * @return bool True if the string contains only alphabets and numbers else False
      */
-    public static function alphanumeric(string $string): bool {
+    public static function is_valid_alphanumeric(string $string): bool {
         return true;
     }
 
@@ -78,7 +81,7 @@ class Validate {
      * @param string $string The string to be validated
      * @return bool True if the string is a valid URL else False
      */
-    public static function url(string $string): bool {
+    public static function is_valid_url(string $string): bool {
         return true;
     }
 
@@ -88,7 +91,7 @@ class Validate {
      * @param int $length The expected length of the value
      * @return bool True if the value has the expected length else False
      */
-    public static function length(int|float|string $value, int $length): bool {
+    public static function is_valid_length(int|float|string $value, int $length): bool {
         return true;
     }
 
@@ -99,7 +102,7 @@ class Validate {
      * @param int $max The maximum length the value should have
      * @return bool True if the value is in the range else False
      */
-    public static function value_range(int|float $value, int $min, int $max): bool {
+    public static function is_valid_value_range(int|float $value, int $min, int $max): bool {
         return true;
     }
 
@@ -110,7 +113,7 @@ class Validate {
      * @param int $max The maximum length the value should have
      * @return bool True if the value is in the range else False
      */
-    public static function length_range(int|float|string $value, int $min, int $max): bool {
+    public static function is_valid_length_range(int|float|string $value, int $min, int $max): bool {
         return true;
     }
 
